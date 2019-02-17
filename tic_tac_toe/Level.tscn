@@ -1,0 +1,250 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Level.gd" type="Script" id=1]
+[ext_resource path="res://BrainArea.gd" type="Script" id=2]
+[ext_resource path="res://BoardAnimator.gd" type="Script" id=3]
+[ext_resource path="res://WinAnimator.gd" type="Script" id=4]
+[ext_resource path="res://Board.gd" type="Script" id=5]
+[ext_resource path="res://Objects/Button.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/AI_won.png" type="Texture" id=7]
+[ext_resource path="res://assets/you_won.png" type="Texture" id=8]
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "ChangeTurn"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("HUD/SideWrapper/Player1Side:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 1, 0.694118, 1 ), Color( 0, 1, 0.694118, 0.156863 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HUD/SideWrapper/AISide:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.113725, 0.647059, 1, 0.156863 ), Color( 0.113725, 0.647059, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+
+resource_name = "won"
+length = 0.4
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("HUD/WinBoardWrapper/Player1Won:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 1, 0.670588, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HUD/WinBoardWrapper/AIWon:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 0, 0.6, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HUD/WinBoardWrapper:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.18, 0.2, 0.22 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[node name="Level" type="Node"]
+script = ExtResource( 1 )
+board_path = NodePath("HUD/BoardWrapper/CenterContainer/Board")
+
+[node name="BrainArea" type="BrainArea" parent="."]
+input_layer_size = 9
+hidden_layers_count = 2
+output_layer_size = 9
+hidden_layer_0/size = 18
+hidden_layer_0/activation = 0
+hidden_layer_1/size = 18
+hidden_layer_1/activation = 0
+script = ExtResource( 2 )
+
+[node name="BoardAnimator" type="AnimationPlayer" parent="."]
+anims/ChangeTurn = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="WinAnimator" type="AnimationPlayer" parent="."]
+anims/won = SubResource( 2 )
+script = ExtResource( 4 )
+
+[node name="HUD" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="ColorRect" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.0823529, 0.160784, 0.294118, 1 )
+
+[node name="SideWrapper" type="VBoxContainer" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="AISide" type="ColorRect" parent="HUD/SideWrapper"]
+margin_right = 1024.0
+margin_bottom = 298.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.113725, 0.647059, 1, 1 )
+
+[node name="Player1Side" type="ColorRect" parent="HUD/SideWrapper"]
+margin_top = 302.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0, 1, 0.694118, 0.156863 )
+
+[node name="BoardWrapper" type="ColorRect" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -195.0
+margin_top = -194.0
+margin_right = 195.0
+margin_bottom = 194.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color( 0.0823529, 0.160784, 0.294118, 1 )
+
+[node name="CenterContainer" type="MarginContainer" parent="HUD/BoardWrapper"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 380, 380 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="Board" type="GridContainer" parent="HUD/BoardWrapper/CenterContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 380.0
+margin_bottom = 378.0
+columns = 3
+script = ExtResource( 5 )
+level_path = NodePath("../../../..")
+
+[node name="Button00" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+margin_right = 120.0
+margin_bottom = 120.0
+
+[node name="Button01" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+margin_left = 124.0
+margin_right = 244.0
+margin_bottom = 120.0
+
+[node name="Button02" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+margin_left = 248.0
+margin_right = 368.0
+margin_bottom = 120.0
+
+[node name="Button10" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+margin_top = 124.0
+margin_right = 120.0
+margin_bottom = 244.0
+
+[node name="Button11" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+margin_left = 124.0
+margin_top = 124.0
+margin_right = 244.0
+margin_bottom = 244.0
+
+[node name="Button12" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+margin_left = 248.0
+margin_top = 124.0
+margin_right = 368.0
+margin_bottom = 244.0
+
+[node name="Button20" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+margin_top = 248.0
+margin_right = 120.0
+margin_bottom = 368.0
+
+[node name="Button21" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+margin_left = 124.0
+margin_top = 248.0
+margin_right = 244.0
+margin_bottom = 368.0
+
+[node name="Button22" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+margin_left = 248.0
+margin_top = 248.0
+margin_right = 368.0
+margin_bottom = 368.0
+
+[node name="WinBoardWrapper" type="Control" parent="HUD"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="AIWon" type="TextureRect" parent="HUD/WinBoardWrapper"]
+modulate = Color( 1, 1, 1, -7.45058e-08 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -152.5
+margin_top = -184.5
+margin_right = 152.5
+margin_bottom = 184.5
+texture = ExtResource( 7 )
+stretch_mode = 4
+
+[node name="Player1Won" type="TextureRect" parent="HUD/WinBoardWrapper"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 4
+
+[connection signal="game_advanced" from="." to="BrainArea" method="_on_Level_game_advanced"]
+[connection signal="game_advanced" from="." to="BoardAnimator" method="_on_Level_game_advanced"]
+[connection signal="game_finished" from="." to="." method="_on_Level_game_finished"]
+[connection signal="game_finished" from="." to="WinAnimator" method="_on_Level_game_finished"]
+[connection signal="game_started" from="." to="BoardAnimator" method="_on_Level_game_started"]
+[connection signal="game_started" from="." to="WinAnimator" method="_on_Level_game_started"]
