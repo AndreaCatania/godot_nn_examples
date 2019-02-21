@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Level.gd" type="Script" id=1]
 [ext_resource path="res://BrainArea.gd" type="Script" id=2]
-[ext_resource path="res://BoardAnimator.gd" type="Script" id=3]
-[ext_resource path="res://WinAnimator.gd" type="Script" id=4]
-[ext_resource path="res://Board.gd" type="Script" id=5]
-[ext_resource path="res://Objects/Button.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/AI_won.png" type="Texture" id=7]
-[ext_resource path="res://assets/you_won.png" type="Texture" id=8]
+[ext_resource path="res://Player1Random.gd" type="Script" id=3]
+[ext_resource path="res://BoardAnimator.gd" type="Script" id=4]
+[ext_resource path="res://WinAnimator.gd" type="Script" id=5]
+[ext_resource path="res://Board.gd" type="Script" id=6]
+[ext_resource path="res://Objects/Button.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/AI_won.png" type="Texture" id=8]
+[ext_resource path="res://assets/you_won.png" type="Texture" id=9]
 
 [sub_resource type="Animation" id=1]
 
@@ -83,24 +84,29 @@ tracks/2/keys = {
 [node name="Level" type="Node"]
 script = ExtResource( 1 )
 board_path = NodePath("HUD/BoardWrapper/CenterContainer/Board")
+brain_path = NodePath("BrainArea")
+game_finish_duration = 1.0
 
 [node name="BrainArea" type="BrainArea" parent="."]
 input_layer_size = 9
 hidden_layers_count = 2
 output_layer_size = 9
-hidden_layer_0/size = 18
+hidden_layer_0/size = 200
 hidden_layer_0/activation = 0
-hidden_layer_1/size = 18
+hidden_layer_1/size = 100
 hidden_layer_1/activation = 0
 script = ExtResource( 2 )
 
+[node name="Player1Random" type="Node" parent="."]
+script = ExtResource( 3 )
+
 [node name="BoardAnimator" type="AnimationPlayer" parent="."]
 anims/ChangeTurn = SubResource( 1 )
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
 [node name="WinAnimator" type="AnimationPlayer" parent="."]
 anims/won = SubResource( 2 )
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 
 [node name="HUD" type="Control" parent="."]
 anchor_right = 1.0
@@ -163,52 +169,52 @@ margin_top = 10.0
 margin_right = 380.0
 margin_bottom = 378.0
 columns = 3
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 level_path = NodePath("../../../..")
 
-[node name="Button00" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+[node name="Button00" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 7 )]
 margin_right = 120.0
 margin_bottom = 120.0
 
-[node name="Button01" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+[node name="Button01" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 7 )]
 margin_left = 124.0
 margin_right = 244.0
 margin_bottom = 120.0
 
-[node name="Button02" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+[node name="Button02" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 7 )]
 margin_left = 248.0
 margin_right = 368.0
 margin_bottom = 120.0
 
-[node name="Button10" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+[node name="Button10" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 7 )]
 margin_top = 124.0
 margin_right = 120.0
 margin_bottom = 244.0
 
-[node name="Button11" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+[node name="Button11" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 7 )]
 margin_left = 124.0
 margin_top = 124.0
 margin_right = 244.0
 margin_bottom = 244.0
 
-[node name="Button12" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+[node name="Button12" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 7 )]
 margin_left = 248.0
 margin_top = 124.0
 margin_right = 368.0
 margin_bottom = 244.0
 
-[node name="Button20" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+[node name="Button20" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 7 )]
 margin_top = 248.0
 margin_right = 120.0
 margin_bottom = 368.0
 
-[node name="Button21" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+[node name="Button21" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 7 )]
 margin_left = 124.0
 margin_top = 248.0
 margin_right = 244.0
 margin_bottom = 368.0
 
-[node name="Button22" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 6 )]
+[node name="Button22" parent="HUD/BoardWrapper/CenterContainer/Board" instance=ExtResource( 7 )]
 margin_left = 248.0
 margin_top = 248.0
 margin_right = 368.0
@@ -229,7 +235,7 @@ margin_left = -152.5
 margin_top = -184.5
 margin_right = 152.5
 margin_bottom = 184.5
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 stretch_mode = 4
 
 [node name="Player1Won" type="TextureRect" parent="HUD/WinBoardWrapper"]
@@ -238,13 +244,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 expand = true
 stretch_mode = 4
 
 [connection signal="game_advanced" from="." to="BrainArea" method="_on_Level_game_advanced"]
+[connection signal="game_advanced" from="." to="Player1Random" method="_on_Level_game_advanced"]
 [connection signal="game_advanced" from="." to="BoardAnimator" method="_on_Level_game_advanced"]
-[connection signal="game_finished" from="." to="." method="_on_Level_game_finished"]
+[connection signal="game_finished" from="." to="BrainArea" method="_on_Level_game_finished"]
 [connection signal="game_finished" from="." to="WinAnimator" method="_on_Level_game_finished"]
+[connection signal="game_started" from="." to="BrainArea" method="_on_Level_game_started"]
+[connection signal="game_started" from="." to="Player1Random" method="_on_Level_game_started"]
 [connection signal="game_started" from="." to="BoardAnimator" method="_on_Level_game_started"]
 [connection signal="game_started" from="." to="WinAnimator" method="_on_Level_game_started"]
+[connection signal="player1_move" from="." to="BrainArea" method="_on_Level_player1_move"]
