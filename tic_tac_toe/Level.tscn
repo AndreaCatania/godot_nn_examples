@@ -248,13 +248,13 @@ texture = ExtResource( 9 )
 expand = true
 stretch_mode = 4
 
-[connection signal="game_advanced" from="." to="BrainArea" method="_on_Level_game_advanced"]
 [connection signal="game_advanced" from="." to="Player1Random" method="_on_Level_game_advanced"]
+[connection signal="game_advanced" from="." to="BrainArea" method="_on_Level_game_advanced"]
 [connection signal="game_advanced" from="." to="BoardAnimator" method="_on_Level_game_advanced"]
 [connection signal="game_finished" from="." to="BrainArea" method="_on_Level_game_finished"]
 [connection signal="game_finished" from="." to="WinAnimator" method="_on_Level_game_finished"]
-[connection signal="game_started" from="." to="BrainArea" method="_on_Level_game_started"]
 [connection signal="game_started" from="." to="Player1Random" method="_on_Level_game_started"]
+[connection signal="game_started" from="." to="BrainArea" method="_on_Level_game_started"]
 [connection signal="game_started" from="." to="BoardAnimator" method="_on_Level_game_started"]
 [connection signal="game_started" from="." to="WinAnimator" method="_on_Level_game_started"]
 [connection signal="player1_move" from="." to="BrainArea" method="_on_Level_player1_move"]
