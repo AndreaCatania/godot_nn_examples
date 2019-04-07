@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Objects/GameLeve.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Ball.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/PlayerController.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Objects/Table.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/GameCamera.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/HUD.tscn" type="PackedScene" id=7]
+
+[node name="GameLevel" type="Node"]
+script = ExtResource( 1 )
+player_scene = ExtResource( 2 )
+ball_scene = ExtResource( 3 )
+player_controller_scene = ExtResource( 4 )
+camera_path = NodePath("../GameLevel/Camera2D")
+table_path = NodePath("../GameLevel/Table")
+HUD_path = NodePath("Camera2D/CanvasLayer/HUD")
+start_round_timer_path = NodePath("StartRoundTimer")
+
+[node name="Table" parent="." instance=ExtResource( 5 )]
+goal_player1_path = NodePath("../../GameLevel/Table/GoalPlayer1")
+goal_player2_path = NodePath("../../GameLevel/Table/GoalPlayer1")
+spawn_player1_path = NodePath("../../GameLevel/Table/SpawnPlayer1")
+spawn_player2_path = NodePath("../../GameLevel/Table/SpawnPlayer2")
+spawn_ball_path = NodePath("../../GameLevel/Table/SpawnBall")
+
+[node name="Camera2D" parent="." instance=ExtResource( 6 )]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="HUD" parent="Camera2D/CanvasLayer" instance=ExtResource( 7 )]
+
+[node name="StartRoundTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+

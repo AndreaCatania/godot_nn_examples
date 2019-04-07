@@ -1,0 +1,73 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "Ball",
+"language": "GDScript",
+"path": "res://Objects/Ball.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Objects/Player.gd"
+} ]
+_global_script_class_icons={
+"Ball": "",
+"Player": ""
+}
+
+[application]
+
+config/name="sPong"
+run/main_scene="res://GameLeve.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+Globals="*res://Objects/Globals.gd"
+
+[display]
+
+window/size/width=602
+window/size/height=502
+window/vsync/use_vsync=false
+window/stretch/mode="2d"
+window/stretch/aspect="keep_height"
+
+[input]
+
+Player1MoveUp={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
+ ]
+}
+Player1MoveDown={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_physics/layer_1="Env"
+2d_physics/layer_2="Ball"
+2d_physics/layer_3="Player"
+2d_physics/layer_4="Goal"
+
+[physics]
+
+common/physics_fps=240
+2d/default_gravity=0
+
+[rendering]
+
+environment/default_clear_color=Color( 0, 0, 0, 1 )
+environment/default_environment="res://default_env.tres"

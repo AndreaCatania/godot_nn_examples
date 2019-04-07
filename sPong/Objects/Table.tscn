@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Objects/Table.gd" type="Script" id=1]
+[ext_resource path="res://Assets/table.png" type="Texture" id=2]
+[ext_resource path="res://Assets/middle_line.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 470.192, 100 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 100, 255 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 400, 300 )
+
+[node name="Table" type="Node2D"]
+script = ExtResource( 1 )
+goal_player1_path = NodePath("GoalPlayer1")
+goal_player2_path = NodePath("GoalPlayer1")
+spawn_player1_path = NodePath("SpawnPlayer1")
+spawn_player2_path = NodePath("SpawnPlayer2")
+spawn_ball_path = NodePath("SpawnBall")
+
+[node name="TableSprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MiddleLine" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="UpBorder" type="StaticBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 0, -351 )
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpBorder"]
+shape = SubResource( 1 )
+
+[node name="DownBorder" type="StaticBody2D" parent="."]
+editor/display_folded = true
+position = Vector2( 0, 351 )
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DownBorder"]
+shape = SubResource( 1 )
+
+[node name="GoalPlayer1" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( -400, 0 )
+monitorable = false
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalPlayer1"]
+shape = SubResource( 2 )
+
+[node name="GoalPlayer2" type="Area2D" parent="."]
+editor/display_folded = true
+position = Vector2( 400, 0 )
+monitorable = false
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalPlayer2"]
+shape = SubResource( 2 )
+
+[node name="PlayeableArea" type="Area2D" parent="."]
+editor/display_folded = true
+monitorable = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayeableArea"]
+shape = SubResource( 3 )
+
+[node name="SpawnPlayer1" type="Node2D" parent="."]
+position = Vector2( -250, 0 )
+
+[node name="SpawnPlayer2" type="Node2D" parent="."]
+position = Vector2( 250, 0 )
+
+[node name="SpawnBall" type="Node2D" parent="."]
+position = Vector2( 0, -230 )
+
+[connection signal="body_entered" from="GoalPlayer1" to="." method="_on_GoalPlayer1_body_entered"]
+[connection signal="body_entered" from="GoalPlayer2" to="." method="_on_GoalPlayer2_body_entered"]
+[connection signal="body_exited" from="PlayeableArea" to="." method="_on_PlayeableArea_body_exited"]

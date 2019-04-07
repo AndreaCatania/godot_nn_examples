@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Objects/HUD.gd" type="Script" id=1]
+[ext_resource path="res://Assets/ScoreFont.tres" type="DynamicFont" id=2]
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+score_player1_lbl_path = NodePath("ScorePlayer1")
+score_player2_lbl_path = NodePath("ScorePlayer2")
+
+[node name="ScorePlayer1" type="Label" parent="."]
+anchor_left = 0.25
+anchor_top = 0.079
+anchor_right = 0.25
+anchor_bottom = 0.079
+margin_left = -29.2098
+margin_top = -19.0754
+margin_right = 44.7902
+margin_bottom = 37.9246
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.913725, 0.913725, 0.913725, 0.403922 )
+text = "00"
+
+[node name="ScorePlayer2" type="Label" parent="."]
+anchor_left = 0.75
+anchor_top = 0.079
+anchor_right = 0.75
+anchor_bottom = 0.079
+margin_left = -33.0792
+margin_top = -18.3773
+margin_right = 40.9208
+margin_bottom = 38.6227
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.913725, 0.913725, 0.913725, 0.403922 )
+text = "00"
+
