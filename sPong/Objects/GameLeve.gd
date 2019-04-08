@@ -1,4 +1,5 @@
 extends Node
+class_name GameLevel
 
 export(bool) var is_player_1_gamer = true
 
@@ -69,7 +70,7 @@ func start_game():
 
 func start_round():
 	if start_round_timer.get_wait_time() > 0.1:
-		ball.set_mode(RigidBody2D.MODE_KINEMATIC)
+		ball.set_linear_velocity(Vector2())
 		ball.hide()
 		start_round_timer.start()
 	else:
@@ -104,6 +105,5 @@ func _start_round():
 	var from = table.get_ball_spawn().get_global_transform()
 	var dir = table.get_ball_kick_direction()
 	ball.kick(from, dir)
-	ball.set_mode(RigidBody2D.MODE_CHARACTER)
 	ball.show()
 	start_round_timer.stop()

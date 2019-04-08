@@ -26,6 +26,10 @@ func _integrate_forces(state):
 	for i in range(state.get_contact_count()):
 		var collider = state.get_contact_collider_object(i)
 		if collider is Player:
-			var collider_vel = collider.get_linear_velocity()
+			var collider_vel = collider.get_linear_velocity().length_squared()
 			var n = state.get_contact_local_normal(i)
-			state.apply_impulse(Vector2(), n * (collider_vel * Globals.player_hit_impulse))
+			state.apply_impulse(Vector2(), n * (min(collider_vel, 1.0) * Globals.player_hit_impulse))
+
+
+func _on_Ball_body_entered(body):
+	pass

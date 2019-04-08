@@ -5,6 +5,6 @@ enum {
 	Player2
 }
 
-const player_velocity = 1500
-const player_hit_impulse = 2
+const player_velocity = 1000
+const player_hit_impulse = 1.5
 const ball_velocity = 450

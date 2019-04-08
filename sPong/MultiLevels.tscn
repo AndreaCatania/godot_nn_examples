@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Objects/MultiLevels.gd" type="Script" id=1]
+[ext_resource path="res://Objects/MultiLevelViewport.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GameLeve.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/MultiLevelsHUD.gd" type="Script" id=4]
+
+[node name="MultiLevels" type="Node"]
+script = ExtResource( 1 )
+viewport_scene = ExtResource( 2 )
+game_level_scene = ExtResource( 3 )
+level_count = 50
+
+[node name="HUD" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+main_world_path = NodePath("..")
+info_list_path = NodePath("GridContainer/WorldsInfo/VScrollBar/InfoList")
+update_delay = 2.0
+fps_lbl_path = NodePath("GridContainer/MarginContainer2/VBoxContainer/FPSLabel")
+
+[node name="GridContainer" type="GridContainer" parent="HUD"]
+margin_left = 8.0
+margin_right = 8.0
+margin_bottom = 502.0
+custom_constants/vseparation = 10
+columns = 2
+
+[node name="WorldsInfo" type="MarginContainer" parent="HUD/GridContainer"]
+editor/display_folded = true
+margin_right = 85.0
+margin_bottom = 502.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VScrollBar" type="ScrollContainer" parent="HUD/GridContainer/WorldsInfo"]
+margin_right = 85.0
+margin_bottom = 502.0
+scroll_horizontal_enabled = false
+
+[node name="InfoList" type="VBoxContainer" parent="HUD/GridContainer/WorldsInfo/VScrollBar"]
+margin_right = 73.0
+margin_bottom = 14.0
+
+[node name="HeaderLabel" type="Label" parent="HUD/GridContainer/WorldsInfo/VScrollBar/InfoList"]
+margin_right = 73.0
+margin_bottom = 14.0
+text = "World stats"
+
+[node name="MarginContainer2" type="MarginContainer" parent="HUD/GridContainer"]
+margin_left = 89.0
+margin_right = 89.0
+margin_bottom = 502.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/GridContainer/MarginContainer2"]
+margin_bottom = 502.0
+
+[node name="FPSLabel" type="Label" parent="HUD/GridContainer/MarginContainer2/VBoxContainer"]
+margin_bottom = 14.0
+
+[connection signal="ready" from="." to="HUD" method="_on_MultiLevels_ready"]

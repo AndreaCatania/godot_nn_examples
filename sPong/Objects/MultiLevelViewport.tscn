@@ -1,0 +1,10 @@
+[gd_scene format=2]
+
+[node name="MultiLevelViewport" type="Viewport"]
+hdr = false
+disable_3d = true
+keep_3d_linear = true
+usage = 1
+render_target_clear_mode = 1
+render_target_update_mode = 0
+

@@ -50,7 +50,6 @@ collision_mask = 7
 shape = SubResource( 1 )
 
 [node name="GoalPlayer1" type="Area2D" parent="."]
-editor/display_folded = true
 position = Vector2( -400, 0 )
 monitorable = false
 collision_layer = 8
@@ -60,7 +59,6 @@ collision_mask = 2
 shape = SubResource( 2 )
 
 [node name="GoalPlayer2" type="Area2D" parent="."]
-editor/display_folded = true
 position = Vector2( 400, 0 )
 monitorable = false
 collision_layer = 8
