@@ -1,11 +1,17 @@
 extends Node
 class_name GameLevel
 
+enum {
+	GAME_STOPPED,
+	GAME_PLAYING
+}
+
 export(bool) var is_player_1_gamer = true
 
 export(PackedScene) var player_scene
 export(PackedScene) var ball_scene
-export(PackedScene) var player_controller_scene
+export(PackedScene) var player1_controller_scene
+export(PackedScene) var player2_controller_scene
 export(NodePath) var camera_path
 export(NodePath) var table_path
 export(NodePath) var HUD_path
@@ -19,10 +25,21 @@ var ball
 var HUD
 var start_round_timer
 
-var score_player1 = 0
-var score_player2 = 0
+var score_player1 := 0
+var score_player2 := 0
+
+var state := GAME_STOPPED
+
 
 """ PUBLIC """
+
+
+func get_state():
+	return state
+
+
+func is_playing() -> bool:
+	return state == GAME_PLAYING
 
 
 """ PRIVATE """
@@ -57,10 +74,12 @@ func init_positions():
 
 
 func init_controller():
-	if is_player_1_gamer:
-		var pc1 = player_controller_scene.instance()
-		pc1.init(player1)
-		add_child(pc1)
+	var pc1 = player1_controller_scene.instance()
+	var pc2 = player2_controller_scene.instance()
+	pc1.init(self, player1)
+	pc2.init(self, player2)
+	add_child(pc1)
+	add_child(pc2)
 
 
 func start_game():
@@ -93,6 +112,7 @@ func on_goal_received(player):
 	else:
 		score_player1 += 1
 
+	state = GAME_STOPPED
 	HUD.update_score(score_player1, score_player2)
 	start_round()
 
@@ -107,3 +127,4 @@ func _start_round():
 	ball.kick(from, dir)
 	ball.show()
 	start_round_timer.stop()
+	state = GAME_PLAYING

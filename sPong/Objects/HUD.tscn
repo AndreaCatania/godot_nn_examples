@@ -7,32 +7,56 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-score_player1_lbl_path = NodePath("ScorePlayer1")
-score_player2_lbl_path = NodePath("ScorePlayer2")
+player1_side_path = NodePath("Player1Side")
+player2_side_path = NodePath("Player2Side")
 
-[node name="ScorePlayer1" type="Label" parent="."]
-anchor_left = 0.25
-anchor_top = 0.079
-anchor_right = 0.25
-anchor_bottom = 0.079
-margin_left = -29.2098
-margin_top = -19.0754
-margin_right = 44.7902
-margin_bottom = 37.9246
+[node name="Player1Side" type="Control" parent="."]
+anchor_right = 0.5
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Score" type="Label" parent="Player1Side"]
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.1
+margin_left = -37.0
+margin_top = -23.8842
+margin_right = 37.0
+margin_bottom = 33.1158
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.913725, 0.913725, 0.913725, 0.403922 )
 text = "00"
 
-[node name="ScorePlayer2" type="Label" parent="."]
-anchor_left = 0.75
-anchor_top = 0.079
-anchor_right = 0.75
-anchor_bottom = 0.079
-margin_left = -33.0792
-margin_top = -18.3773
-margin_right = 40.9208
-margin_bottom = 38.6227
+[node name="SynapticVisualizer" type="Control" parent="Player1Side"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="Player2Side" type="Control" parent="."]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Score" type="Label" parent="Player2Side"]
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.1
+margin_left = -35.7895
+margin_top = -22.1053
+margin_right = 38.2105
+margin_bottom = 34.8947
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.913725, 0.913725, 0.913725, 0.403922 )
 text = "00"
 
+[node name="SynapticVisualizer" type="Control" parent="Player2Side"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5

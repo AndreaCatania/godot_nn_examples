@@ -8,3 +8,5 @@ enum {
 const player_velocity = 1000
 const player_hit_impulse = 1.5
 const ball_velocity = 450
+const table_size_x = 500
+const table_size_y = 500

@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Objects/InputSynapticVisualizer.gd" type="Script" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D txt;
+uniform vec4 color: hint_color;
+uniform vec4 color_bg: hint_color;
+
+void vertex(){}
+
+void fragment(){
+	float r = texture(txt, UV).r;
+	if( r > 0.001){
+		COLOR = color * r;
+	}else{
+		COLOR = color_bg;
+	}
+	COLOR.a = 1.0;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/color = Color( 1, 0.164706, 0, 1 )
+shader_param/color_bg = Color( 0.0588235, 0.0588235, 0.0588235, 1 )
+
+[node name="ColorRect" type="ColorRect"]
+material = SubResource( 2 )
+margin_right = 104.0
+margin_bottom = 100.0
+script = ExtResource( 1 )

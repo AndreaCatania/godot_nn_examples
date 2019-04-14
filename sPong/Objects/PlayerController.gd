@@ -1,13 +1,15 @@
 extends Node
 
 
+var level: GameLevel = null
 var player: Player = null
 
 
 """ PUBLIC """
 
 
-func init(p_player: Player):
+func init(p_level: GameLevel, p_player: Player):
+	level = p_level
 	player = p_player
 
 
