@@ -18,7 +18,7 @@ void fragment(){
 	}else{
 		COLOR = color_bg;
 	}
-	COLOR.a = 1.0;
+	COLOR.a = 0.8;
 }"
 
 [sub_resource type="ShaderMaterial" id=2]
@@ -28,6 +28,6 @@ shader_param/color_bg = Color( 0.0588235, 0.0588235, 0.0588235, 1 )
 
 [node name="ColorRect" type="ColorRect"]
 material = SubResource( 2 )
-margin_right = 104.0
-margin_bottom = 100.0
+margin_right = 50.0
+margin_bottom = 150.0
 script = ExtResource( 1 )
