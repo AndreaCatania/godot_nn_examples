@@ -1,8 +1,18 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Objects/AIController.gd" type="Script" id=1]
 [ext_resource path="res://Objects/InputSynapticVisualizer.tscn" type="PackedScene" id=2]
 
+[sub_resource type="SharpBrainAreaStructureAncestor" id=1]
+input_count = 1875
+output_count = 2
+randomize_weights = true
+output_activation_func = 6
+
 [node name="AIController" type="Node"]
 script = ExtResource( 1 )
 synaptic_visualizer_scene = ExtResource( 2 )
+brain_area_path = NodePath("SharpBrainArea")
+
+[node name="SharpBrainArea" type="SharpBrainArea" parent="."]
+structure = SubResource( 1 )

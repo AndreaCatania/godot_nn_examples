@@ -7,4 +7,3 @@ keep_3d_linear = true
 usage = 1
 render_target_clear_mode = 1
 render_target_update_mode = 0
-

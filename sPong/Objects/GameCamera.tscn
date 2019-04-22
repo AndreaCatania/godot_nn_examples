@@ -3,4 +3,3 @@
 [node name="Camera2D" type="Camera2D"]
 current = true
 process_mode = 0
-

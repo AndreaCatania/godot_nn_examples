@@ -3,21 +3,18 @@ class_name Player
 
 
 var player_id
-var motion = MOTION_NONE
+var motion := 0.0
 
 
 """ PUBLIC """
-
-
-enum {MOTION_UP, MOTION_NONE, MOTION_DOWN}
 
 
 func init(p_player_id):
 	player_id = p_player_id
 
 
-func move(p_motion):
-	motion = p_motion
+func move(p_motion: float):
+	motion = clamp(p_motion, -1.0, 1.0)
 
 
 """ NOTIFICATIONS """
@@ -26,10 +23,9 @@ func move(p_motion):
 func _integrate_forces(state):
 	var vel = Vector2(0, 0)
 
-	if motion == MOTION_UP:
-		vel.y = -Globals.player_velocity
-	elif motion == MOTION_DOWN:
-		vel.y = Globals.player_velocity
+	vel.y = motion * Globals.player_velocity
 
 	set_linear_velocity(vel)
 	set_angular_velocity(0)
+
+

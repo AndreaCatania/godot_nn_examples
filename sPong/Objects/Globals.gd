@@ -5,8 +5,21 @@ enum {
 	Player2
 }
 
+enum {
+	GAME_PAUSED,
+	GAME_PLAYING,
+	GAME_ENDED
+}
+
 const player_velocity = 1000
-const player_hit_impulse = 1.5
+const player_hit_impulse = 1.1
 const ball_velocity = 450
 const table_size_x = 500
 const table_size_y = 500
+
+const NN_grid_size_x = 25
+const NN_grid_size_y = 75
+const NN_propagation_radius = 1
+const NN_propagation_power = 250
+const NN_grid_factor = Vector2(-0.1, -0.1)
+const NN_grid_offset = Vector2(25.0, 75.0 / 2.0)

@@ -53,7 +53,7 @@ func get_ball_spawn() -> Node2D:
 func get_ball_kick_direction():
 	return Vector2(
 		max(randf()+0.3, 1.0)*sign(randf()-0.5),
-		randf()*0.5)
+		min(randf()+0.1, 1.0))
 
 
 func _on_PlayeableArea_body_exited(body):

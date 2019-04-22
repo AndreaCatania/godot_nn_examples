@@ -26,5 +26,4 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
 texture = ExtResource( 3 )
-
 [connection signal="body_entered" from="." to="." method="_on_Ball_body_entered"]

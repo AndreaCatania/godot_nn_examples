@@ -16,6 +16,8 @@ physics_material_override = ExtResource( 1 )
 gravity_scale = 0.0
 custom_integrator = true
 continuous_cd = 2
+contacts_reported = 2
+contact_monitor = true
 can_sleep = false
 script = ExtResource( 2 )
 
@@ -24,4 +26,3 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
 texture = ExtResource( 3 )
-

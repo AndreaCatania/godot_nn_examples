@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "AIController",
+"language": "GDScript",
+"path": "res://Objects/AIController.gd"
+}, {
 "base": "RigidBody2D",
 "class": "Ball",
 "language": "GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://Objects/Player.gd"
 } ]
 _global_script_class_icons={
+"AIController": "",
 "Ball": "",
 "GameLevel": "",
 "Player": ""
@@ -33,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="sPong"
-run/main_scene="res://GameLeve.tscn"
+run/main_scene="res://MultiLevels.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -69,8 +75,8 @@ Player1MoveDown={
 
 [physics]
 
-common/physics_fps=120
-common/physics_jitter_fix=0.0
+common/physics_fps=80
+2d/thread_model=2
 2d/default_gravity=0
 common/enable_object_picking=false
 

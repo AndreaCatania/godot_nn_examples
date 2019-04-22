@@ -17,9 +17,15 @@ func init(p_level: GameLevel, p_player: Player):
 
 
 func _process(delta):
+	if player == null:
+		return
+
+	var motion := 0.0
+
 	if Input.is_action_pressed("Player1MoveUp"):
-		player.move(Player.MOTION_UP)
-	elif Input.is_action_pressed("Player1MoveDown"):
-		player.move(Player.MOTION_DOWN)
-	else:
-		player.move(Player.MOTION_NONE)
+		motion -= 1
+
+	if Input.is_action_pressed("Player1MoveDown"):
+		motion += 1
+
+	player.move(motion)
