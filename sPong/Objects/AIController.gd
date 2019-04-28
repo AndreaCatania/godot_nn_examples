@@ -14,6 +14,9 @@ var result: SynapticTerminals = null
 var organism_id: int
 
 var fitness := 0.0
+var ball_hits := 0
+
+onready var half_grid = Globals.NN_grid_size_y / 2.0
 
 """ PUBLIC """
 
@@ -25,6 +28,7 @@ func init(p_level: GameLevel, p_player: Player):
 	if player == null:
 		return
 
+	level.table.connect("goal_received", self, "on_goal_received")
 	player.connect("body_exited", self, "_on_ball_exited")
 
 	# Init HUD
@@ -56,7 +60,12 @@ func is_inside_NN_scope(pos: Vector2) -> bool:
 
 func prepare_for_new_game(p_organism_id: int):
 	organism_id = p_organism_id
-	fitness = 0.0
+	fitness = Globals.fitness_starting_fitness
+
+
+func compute_ball_hits_fitness():
+	fitness += Globals.compute_fitness(ball_hits)
+	ball_hits = 0
 
 
 """ NOTIFICATIONS """
@@ -64,10 +73,17 @@ func prepare_for_new_game(p_organism_id: int):
 
 func _on_ball_exited(body):
 	if body is Ball:
-		fitness += 0.2
+		ball_hits += 1
 
 
-func _process(dt):
+func on_goal_received(player_id):
+	if player_id != Globals.Player2:
+		return
+
+	compute_ball_hits_fitness()
+
+
+func _physics_process(dt):
 
 	if player == null or level == null:
 		return
@@ -88,6 +104,11 @@ func _process(dt):
 			Globals.NN_propagation_radius,
 			Globals.NN_propagation_power)
 
+		var y_dist_to_ball = (ball_pos - Vector2(0, half_grid)) / Vector2(Globals.NN_grid_size_x, half_grid)
+		fitness += (1.0 - y_dist_to_ball.length()) * Globals.fitness_ball_closness
+		if synaptic_visualizer:
+			print((1.0 - y_dist_to_ball.length()))
+
 	# Visualize data
 	if synaptic_visualizer:
 		synaptic.paint_on_texture(synaptic_visualizer.get_texture())
@@ -96,11 +117,11 @@ func _process(dt):
 
 	assert(brain_area.guess( synaptic, result ))
 
-	if result.get_value(0) > 0.6:
+	if result.get_value(0) > 0.8:
 		# Move up
 		motion -= 1
 
-	elif result.get_value(1) > 0.6:
+	if result.get_value(1) > 0.8:
 		# Move down
 		motion += 1
 

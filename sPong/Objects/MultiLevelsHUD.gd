@@ -56,5 +56,12 @@ func _process(delta):
 	var main_w = get_node(main_world_path)
 
 	fps_lbl.set_text("FPS: " + String(Engine.get_frames_per_second()))
-	epoch_lbl.set_text("Epoch: " + String(main_w.neat_pop.get_epoch()) + " - Best personal fitness ever: " + String(main_w.neat_pop.get_best_fitness_ever()))
+	var e_info := String()
+	e_info += "Epoch: " + String(main_w.neat_pop.get_epoch())
+	e_info += "\nBest personal fitness ever: " + String(main_w.neat_pop.get_best_fitness_ever())
+	e_info += "\nPop average fitness: " + String(main_w.neat_pop.get_statistic(NeatPopulation.STATISTIC_POP_AVG_FITNESS))
+	e_info += "\nSpecies count: " + String(main_w.neat_pop.get_statistic(NeatPopulation.STATISTIC_SPECIES_COUNT))
+	e_info += "\nBest species offspring count: " + String(main_w.neat_pop.get_statistic(NeatPopulation.STATISTIC_SPECIES_BEST_OFFSPRING))
+	e_info += "\nPop epoch last improvement: " + String(main_w.neat_pop.get_statistic(NeatPopulation.STATISTIC_POP_EPOCH_LAST_IMPROVEMENT))
+	epoch_lbl.set_text(e_info)
 	champ_info_lbl.set_text("Champion: " + main_w.champion_AI.brain_area.description())

@@ -1,10 +1,13 @@
 extends Node
 
+const max_defined_kicks = 10
+
 export var viewport_scene: PackedScene
 export var game_level_scene: PackedScene
 export var AIController_scene: PackedScene
 export var level_count := 2
-export var games_per_organism := 5
+export var games_per_organism := 0
+export var game_time_per_organism := 10.0
 export var neat_pop_path: NodePath
 export var champion_level_path: NodePath
 
@@ -12,6 +15,8 @@ onready var neat_pop: NeatPopulation = get_node(neat_pop_path)
 
 var levels = []
 var AIs = []
+
+var kicks = []
 
 onready var champion_level = get_node(champion_level_path)
 var champion_AI
@@ -31,11 +36,20 @@ func get_level_count() -> int:
 
 
 func get_level(i) -> GameLevel:
-	return levels[i].get_child(0)
+	return levels[i]
 
 
 func get_level_viewport(i) -> Viewport:
-	return levels[i]
+	return levels[i].get_parent()
+
+
+""" This function returns the ball direction.
+It's called by the GameLevel if this script is assigned to GameLevel.ball_kicker
+"""
+func get_ball_kick_direction(current_round: int) -> Vector2:
+	if max_defined_kicks > current_round:
+		return kicks[current_round]
+	return _int_get_ball_kick_direction()
 
 
 """ PRIVATE """
@@ -49,9 +63,11 @@ func add_game_level():
 	var controller = AIController_scene.instance()
 
 	level.end_score_threshold = games_per_organism
+	level.game_time = game_time_per_organism
 	level.use_custom_controllers = true
 	level.no_view = true
 	level.auto_start = false
+	level.ball_kicker = self
 
 	var level_id = levels.size()
 	levels.push_back(level)
@@ -66,11 +82,15 @@ func add_game_level():
 
 func init_champion_game_level():
 	champion_AI = AIController_scene.instance()
-	champion_level.end_score_threshold = games_per_organism
+	champion_level.end_score_threshold = 0
+	champion_level.game_time = 400.0
 	champion_level.set_player_controller(Globals.Player2, champion_AI)
 
 
 func start_all_levels():
+
+	create_ball_kick_list()
+
 	assert(level_in_progress_count == 0)
 	for i in range(levels.size()):
 		start_level(i, level_in_progress_count)
@@ -102,6 +122,18 @@ func epoch_advance():
 	start_champion_level()
 
 
+func create_ball_kick_list():
+	kicks.resize(max_defined_kicks)
+	for i in range(max_defined_kicks):
+		kicks[i] = _int_get_ball_kick_direction()
+
+
+func _int_get_ball_kick_direction() -> Vector2:
+	return Vector2(
+		max(randf()+0.3, 1.0)*sign(randf()-0.5),
+		min(randf()+0.1, 1.0))
+
+
 """ NOTIFICATIONS """
 
 
@@ -120,8 +152,9 @@ func on_game_ended(level_id):
 
 	level_in_progress_count -= 1
 
-	var organism = AIs[level_id]
-	neat_pop.organism_set_fitness(organism.organism_id, organism.fitness)
+	var controller = AIs[level_id]
+	controller.compute_ball_hits_fitness()
+	neat_pop.organism_set_fitness(controller.organism_id, controller.fitness)
 
 	if organism_processed_counter >= neat_pop.population_size:
 		if level_in_progress_count <= 0:

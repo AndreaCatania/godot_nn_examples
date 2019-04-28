@@ -50,7 +50,10 @@ func get_ball_spawn() -> Node2D:
 	return get_node(spawn_ball_path) as Node2D
 
 
-func get_ball_kick_direction():
+""" This function returns the ball direction.
+It's called by the GameLevel if this script is assigned to GameLevel.ball_kicker
+"""
+func get_ball_kick_direction(current_round: int) -> Vector2:
 	return Vector2(
 		max(randf()+0.3, 1.0)*sign(randf()-0.5),
 		min(randf()+0.1, 1.0))

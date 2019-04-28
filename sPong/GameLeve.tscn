@@ -21,8 +21,9 @@ player2_controller_scene = ExtResource( 1 )
 camera_path = NodePath("Camera2D")
 table_path = NodePath("Table")
 HUD_path = NodePath("Camera2D/CanvasLayer/HUD")
-start_round_timer_path = NodePath("StartRoundTimer")
-end_score_threshold = 3
+start_round_delayer_path = NodePath("StartRoundDelayer")
+game_timer_path = NodePath("GameTimer")
+end_score_threshold = 0
 
 [node name="Table" parent="." instance=ExtResource( 2 )]
 goal_player1_path = NodePath("../../GameLevel/Table/GoalPlayer1")
@@ -44,6 +45,11 @@ process_mode = 1
 
 [node name="HUD" parent="Camera2D/CanvasLayer" instance=ExtResource( 3 )]
 
-[node name="StartRoundTimer" type="Timer" parent="."]
+[node name="StartRoundDelayer" type="Timer" parent="."]
 wait_time = 0.01
+one_shot = true
+
+[node name="GameTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 10.0
 one_shot = true

@@ -23,3 +23,10 @@ const NN_propagation_radius = 1
 const NN_propagation_power = 250
 const NN_grid_factor = Vector2(-0.1, -0.1)
 const NN_grid_offset = Vector2(25.0, 75.0 / 2.0)
+
+const fitness_starting_fitness = 0.0
+const fitness_ball_closness = 0.02
+
+
+func compute_fitness(ball_hits) -> float:
+	return pow(ball_hits / 2.0, 3.0)
