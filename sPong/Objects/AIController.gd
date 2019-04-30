@@ -18,6 +18,7 @@ var ball_hits := 0
 
 onready var half_grid = Globals.NN_grid_size_y / 2.0
 
+
 """ PUBLIC """
 
 
@@ -50,12 +51,16 @@ func init(p_level: GameLevel, p_player: Player):
 
 
 func transform_for_nn(pos: Vector2) -> Vector2:
-	return (player.get_global_transform().origin - pos) * Globals.NN_grid_factor + Globals.NN_grid_offset
+	return (player.get_global_transform().origin - pos) *\
+		Globals.NN_grid_factor +\
+		Globals.NN_grid_offset
 
 
 func is_inside_NN_scope(pos: Vector2) -> bool:
-	return pos.x < Globals.NN_grid_size_x and pos.x >= 0 and\
-		pos.y < Globals.NN_grid_size_y and pos.y >= 0
+	# Is always inside
+	return true
+	#return pos.x < Globals.NN_grid_size_x and pos.x >= 0 and\
+	#	pos.y < Globals.NN_grid_size_y and pos.y >= 0
 
 
 func prepare_for_new_game(p_organism_id: int):
@@ -94,7 +99,8 @@ func _physics_process(dt):
 	# Collect game data
 	synaptic.set_all(0)
 
-	var ball_pos := transform_for_nn(level.ball.get_global_transform().origin) 
+	var ball_pos := transform_for_nn(level.ball.get_global_transform().origin)
+	ball_pos.y = clamp(ball_pos.y, 0.0, Globals.NN_grid_size_y)
 
 	if is_inside_NN_scope( ball_pos ):
 		synaptic.set_value__grid(
@@ -104,10 +110,8 @@ func _physics_process(dt):
 			Globals.NN_propagation_radius,
 			Globals.NN_propagation_power)
 
-		var y_dist_to_ball = (ball_pos - Vector2(0, half_grid)) / Vector2(Globals.NN_grid_size_x, half_grid)
-		fitness += (1.0 - y_dist_to_ball.length()) * Globals.fitness_ball_closness
-		if synaptic_visualizer:
-			print((1.0 - y_dist_to_ball.length()))
+		var y_dist_to_ball := abs( (ball_pos.y - half_grid) / half_grid )
+		fitness += (1.0 - y_dist_to_ball) * Globals.fitness_ball_closness
 
 	# Visualize data
 	if synaptic_visualizer:
@@ -124,5 +128,7 @@ func _physics_process(dt):
 	if result.get_value(1) > 0.8:
 		# Move down
 		motion += 1
+
+	# Synaptic two is used to tell the player to not move
 
 	player.move(motion)

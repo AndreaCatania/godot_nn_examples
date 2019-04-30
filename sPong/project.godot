@@ -75,7 +75,7 @@ Player1MoveDown={
 
 [physics]
 
-common/physics_fps=80
+common/physics_fps=180
 2d/thread_model=2
 2d/default_gravity=0
 common/enable_object_picking=false

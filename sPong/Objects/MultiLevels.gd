@@ -100,6 +100,7 @@ func start_all_levels():
 
 func start_champion_level():
 	neat_pop.get_champion_brain_area(champion_AI.brain_area)
+	champion_AI.brain_area.save_knowledge("res://champion_knowledge", true)
 	champion_level.start_game()
 
 

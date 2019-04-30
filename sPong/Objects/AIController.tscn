@@ -4,8 +4,8 @@
 [ext_resource path="res://Objects/InputSynapticVisualizer.tscn" type="PackedScene" id=2]
 
 [sub_resource type="SharpBrainAreaStructureAncestor" id=1]
-input_count = 1875
-output_count = 2
+input_count = 750
+output_count = 3
 randomize_weights = true
 output_activation_func = 6
 

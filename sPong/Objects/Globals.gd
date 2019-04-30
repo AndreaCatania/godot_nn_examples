@@ -17,12 +17,12 @@ const ball_velocity = 450
 const table_size_x = 500
 const table_size_y = 500
 
-const NN_grid_size_x = 25
-const NN_grid_size_y = 75
-const NN_propagation_radius = 1
-const NN_propagation_power = 250
-const NN_grid_factor = Vector2(-0.1, -0.1)
-const NN_grid_offset = Vector2(25.0, 75.0 / 2.0)
+const NN_grid_size_x = 1
+const NN_grid_size_y = 750
+const NN_propagation_radius = 10
+const NN_propagation_power = 0.3
+const NN_grid_factor = Vector2(0, -1.0)
+const NN_grid_offset = Vector2(0, 750.0 / 2.0)
 
 const fitness_starting_fitness = 0.0
 const fitness_ball_closness = 0.02
