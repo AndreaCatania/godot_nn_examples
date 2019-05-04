@@ -44,10 +44,11 @@ func init(p_level: GameLevel, p_player: Player):
 		synaptic = SynapticTerminals.new()
 		result = SynapticTerminals.new()
 
-	synaptic.resize(Globals.NN_grid_size_x * Globals.NN_grid_size_y)
+	# The last one is the bias
+	synaptic.resize(Globals.NN_grid_size_x * Globals.NN_grid_size_y + 1)
 
 	if synaptic_visualizer:
-		synaptic_visualizer.init(Globals.NN_grid_size_x, Globals.NN_grid_size_y)
+		synaptic_visualizer.init(Globals.NN_grid_size_x, Globals.NN_grid_size_y + 1)
 
 
 func transform_for_nn(pos: Vector2) -> Vector2:
@@ -85,6 +86,8 @@ func on_goal_received(player_id):
 	if player_id != Globals.Player2:
 		return
 
+	fitness += Globals.fitness_goal_received
+
 	compute_ball_hits_fitness()
 
 
@@ -100,7 +103,7 @@ func _physics_process(dt):
 	synaptic.set_all(0)
 
 	var ball_pos := transform_for_nn(level.ball.get_global_transform().origin)
-	ball_pos.y = clamp(ball_pos.y, 0.0, Globals.NN_grid_size_y)
+	ball_pos.y = clamp(ball_pos.y, 0.0, Globals.NN_grid_size_y - 1)
 
 	if is_inside_NN_scope( ball_pos ):
 		synaptic.set_value__grid(
@@ -112,6 +115,9 @@ func _physics_process(dt):
 
 		var y_dist_to_ball := abs( (ball_pos.y - half_grid) / half_grid )
 		fitness += (1.0 - y_dist_to_ball) * Globals.fitness_ball_closness
+
+	# Set bias
+	synaptic.set_value( Globals.NN_grid_size_y, 1)
 
 	# Visualize data
 	if synaptic_visualizer:

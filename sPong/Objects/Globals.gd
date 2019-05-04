@@ -26,7 +26,9 @@ const NN_grid_offset = Vector2(0, 750.0 / 2.0)
 
 const fitness_starting_fitness = 0.0
 const fitness_ball_closness = 0.02
+const fitness_goal_received = -10
 
+const champion_best_knw_path = "res://champion_best_knowledge"
 
 func compute_fitness(ball_hits) -> float:
 	return pow(ball_hits / 2.0, 3.0)

@@ -15,12 +15,14 @@ export var table_path: NodePath
 export var HUD_path: NodePath
 export var start_round_delayer_path: NodePath
 export var game_timer_path: NodePath
+export var player_1_wall_path: NodePath
 
 export var auto_start := true
 export var no_view := false
 export var end_score_threshold := 5
 export var game_time := 0.0
 export var reset_position_on_game_start := true
+export var disable_player1_wall := false
 
 var camera = null
 var table = null
@@ -113,6 +115,9 @@ func init_objects():
 	if no_view:
 		camera.queue_free()
 		table.hide()
+
+	if disable_player1_wall:
+		get_node(player_1_wall_path).queue_free()
 
 
 func init_positions():

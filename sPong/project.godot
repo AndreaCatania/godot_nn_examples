@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="sPong"
-run/main_scene="res://MultiLevels.tscn"
+run/main_scene="res://GameLeve.tscn"
 config/icon="res://icon.png"
 
 [autoload]

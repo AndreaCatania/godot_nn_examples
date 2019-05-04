@@ -3,11 +3,8 @@
 [ext_resource path="res://Objects/AIController.gd" type="Script" id=1]
 [ext_resource path="res://Objects/InputSynapticVisualizer.tscn" type="PackedScene" id=2]
 
-[sub_resource type="SharpBrainAreaStructureAncestor" id=1]
-input_count = 750
-output_count = 3
-randomize_weights = true
-output_activation_func = 6
+[sub_resource type="SharpBrainAreaStructureFile" id=1]
+path = "res://champion_best_knowledge"
 
 [node name="AIController" type="Node"]
 script = ExtResource( 1 )

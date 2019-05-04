@@ -23,7 +23,10 @@ table_path = NodePath("Table")
 HUD_path = NodePath("Camera2D/CanvasLayer/HUD")
 start_round_delayer_path = NodePath("StartRoundDelayer")
 game_timer_path = NodePath("GameTimer")
+player_1_wall_path = NodePath("Table/Player1Wall")
 end_score_threshold = 0
+reset_position_on_game_start = false
+disable_player1_wall = true
 
 [node name="Table" parent="." instance=ExtResource( 2 )]
 goal_player1_path = NodePath("../../GameLevel/Table/GoalPlayer1")
@@ -32,10 +35,10 @@ spawn_player1_path = NodePath("../../GameLevel/Table/SpawnPlayer1")
 spawn_player2_path = NodePath("../../GameLevel/Table/SpawnPlayer2")
 spawn_ball_path = NodePath("../../GameLevel/Table/SpawnBall")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Table"]
+[node name="Player1Wall" type="StaticBody2D" parent="Table"]
 position = Vector2( -437.44, 0 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Table/StaticBody2D"]
+[node name="Shape" type="CollisionShape2D" parent="Table/Player1Wall"]
 shape = SubResource( 1 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
