@@ -19,6 +19,7 @@ export var player_1_wall_path: NodePath
 
 export var auto_start := true
 export var no_view := false
+export var hide_synaptic_visualizer := false
 export var end_score_threshold := 5
 export var game_time := 0.0
 export var reset_position_on_game_start := true
@@ -118,6 +119,9 @@ func init_objects():
 
 	if disable_player1_wall:
 		get_node(player_1_wall_path).queue_free()
+
+	if hide_synaptic_visualizer:
+		HUD.hide_syn_vis()
 
 
 func init_positions():

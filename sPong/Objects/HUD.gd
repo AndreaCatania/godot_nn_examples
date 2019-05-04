@@ -25,3 +25,8 @@ func get_player_HUD(player):
 	 return player1_side
 	else:
 		return player2_side
+
+
+func hide_syn_vis():
+	get_player_HUD(Globals.Player1).get_node(node_name_syn_vis).hide()
+	get_player_HUD(Globals.Player2).get_node(node_name_syn_vis).hide()
