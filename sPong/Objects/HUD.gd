@@ -1,6 +1,6 @@
 extends Control
 
-export var level: NodePath
+export var level_path: NodePath
 
 export var player1_side_path: NodePath
 export var player2_side_path: NodePath
@@ -9,9 +9,10 @@ export var main_menu_path: NodePath
 export var difficult_dd_path: NodePath
 export var match_point_dd_path: NodePath
 
+onready var level = get_node(level_path)
 onready var main_menu = get_node(main_menu_path)
-onready var difficult_dd = get_node(difficult_dd_path)
-onready var match_point_dd = get_node(match_point_dd_path)
+onready var difficult_dd : OptionButton = get_node(difficult_dd_path)
+onready var match_point_dd : OptionButton = get_node(match_point_dd_path)
 
 onready var player1_side = get_node(player1_side_path)
 onready var player2_side = get_node(player2_side_path)
@@ -19,6 +20,8 @@ onready var player2_side = get_node(player2_side_path)
 const node_name_score = "Score"
 const node_name_syn_vis = "SynapticVisualizer"
 
+
+var match_points_arr = [10,20,30,50,100]
 
 """ PUBLIC """
 
@@ -59,7 +62,10 @@ func _on_PauseBtn_pressed():
 
 
 func _on_StartMatchBtn_pressed():
-	pass # Replace with function body.
+	level.game_time = 0.0
+	level.end_score_threshold = match_points_arr[match_point_dd.selected]
+	level.difficult = difficult_dd.selected
+	level.start_game()
 
 
 func _on_ExitGameBtn_pressed():
@@ -71,9 +77,10 @@ func _on_ExitGameBtn_pressed():
 
 func init_main_menu():
 
-	difficult_dd.add_item("vs Animal")
+	difficult_dd.add_item("vs Monkey")
 	difficult_dd.add_item("vs Dude")
-	difficult_dd.add_item("vs Galaxy champion")
+	difficult_dd.add_item("vs The Nexus Champion")
+	difficult_dd.selected = 2
 
 	match_point_dd.add_item("10")
 	match_point_dd.add_item("20")
@@ -90,3 +97,13 @@ func show_menu():
 func hide_menu():
 	main_menu.hide()
 	get_tree().paused = false
+
+	$"EasyLbl".hide()
+	$"NormalLbl".hide()
+	$"ExtremeLbl".hide()
+	if level.difficult == 0:
+		$"EasyLbl".show()
+	elif level.difficult == 1:
+		$"NormalLbl".show()
+	else:
+		$"ExtremeLbl".show()

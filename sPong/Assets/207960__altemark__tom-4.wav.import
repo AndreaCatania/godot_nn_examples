@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/207960__altemark__tom-4.wav-ee034d48f3361409e8fdd647e39c27c3.sample"
+
+[deps]
+
+source_file="res://Assets/207960__altemark__tom-4.wav"
+dest_files=[ "res://.import/207960__altemark__tom-4.wav-ee034d48f3361409e8fdd647e39c27c3.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/342218__littlerainyseasons__good-end.wav-2d88211a9517dc366b74426d75ac2de6.sample"
+
+[deps]
+
+source_file="res://Assets/342218__littlerainyseasons__good-end.wav"
+dest_files=[ "res://.import/342218__littlerainyseasons__good-end.wav-2d88211a9517dc366b74426d75ac2de6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

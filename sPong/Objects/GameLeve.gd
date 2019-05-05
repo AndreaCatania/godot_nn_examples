@@ -26,6 +26,8 @@ export var reset_position_on_game_start := true
 export var reset_position_on_round_start := false
 export var disable_player1_wall := false
 
+export var difficult = 3 setget set_difficult
+
 var camera = null
 var table = null
 var player1 = null
@@ -86,6 +88,18 @@ func is_playing() -> bool:
 	return state == Globals.GAME_PLAYING
 
 
+func set_difficult(diff):
+	difficult = diff
+	var s = SharpBrainAreaStructureFile.new()
+	if diff == 0:
+		s.set_file_path(Globals.knw_easy_path)
+	elif diff == 1:
+		s.set_file_path(Globals.knw_normal_path)
+	else:
+		s.set_file_path(Globals.knw_extreme_path)
+	player2_controller.brain_area.structure = s
+
+
 """ PRIVATE """
 
 
@@ -137,6 +151,8 @@ func init_controller():
 	set_player_controller(Globals.Player1, player1_controller_scene.instance())
 	set_player_controller(Globals.Player2, player2_controller_scene.instance())
 
+	set_difficult(difficult)
+
 
 func start_game():
 	randomize()
@@ -149,6 +165,9 @@ func start_game():
 	if reset_position_on_game_start:
 		reset_players_position()
 	round_advance()
+	if !no_view:
+		HUD.hide_menu()
+		HUD.update_score(score_player1, score_player2)
 
 
 func round_advance():
@@ -188,13 +207,17 @@ func end_game():
 
 	if score_player1 >= end_score_threshold:
 		winner = Globals.Player1
+		$"Player1WinAudio".play()
 
 	if score_player2 >= end_score_threshold:
 		winner = Globals.Player2
+		$"Player1LoseAudio".play()
 
 	state = Globals.GAME_ENDED
 	emit_signal("game_ended")
 
+	if !no_view:
+		HUD.show_menu()
 
 func on_ball_outside():
 	round_advance()

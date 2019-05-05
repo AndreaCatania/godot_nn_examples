@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/157218__adamweeden__video-game-die-or-lose-life.wav-24c64d89e7d86ad0a1802639a8c8e88e.sample"
+
+[deps]
+
+source_file="res://Assets/157218__adamweeden__video-game-die-or-lose-life.wav"
+dest_files=[ "res://.import/157218__adamweeden__video-game-die-or-lose-life.wav-24c64d89e7d86ad0a1802639a8c8e88e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

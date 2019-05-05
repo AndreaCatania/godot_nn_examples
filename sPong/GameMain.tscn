@@ -7,7 +7,6 @@
 [node name="GameMain" type="Node"]
 script = ExtResource( 1 )
 intro_scene = ExtResource( 2 )
-skip_intro = true
 
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0

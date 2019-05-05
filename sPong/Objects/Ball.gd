@@ -32,4 +32,7 @@ func _integrate_forces(state):
 
 
 func _on_Ball_body_entered(body):
-	pass
+	if body is Player:
+		$"PlayerHitAudio".play()
+	else:
+		$"EnvHitAudio".play()

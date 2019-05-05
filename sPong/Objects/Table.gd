@@ -8,8 +8,7 @@ export(NodePath) var goal_player2_path
 export(NodePath) var spawn_player1_path
 export(NodePath) var spawn_player2_path
 export(NodePath) var spawn_ball_path
-export(NodePath) var audio_player_goal_p1
-export(NodePath) var audio_player_goal_p2
+export(NodePath) var audio_player_goal
 
 
 """ NOTIFICATIONS """
@@ -17,12 +16,12 @@ export(NodePath) var audio_player_goal_p2
 
 func _on_GoalPlayer1_body_entered(body):
 	emit_signal("goal_received", Globals.Player1)
-	#get_node(audio_player_goal_p1).play()
+	get_node(audio_player_goal).play()
 
 
 func _on_GoalPlayer2_body_entered(body):
 	emit_signal("goal_received", Globals.Player2)
-	#get_node(audio_player_goal_p2).play()
+	get_node(audio_player_goal).play()
 
 
 """ PUBLIC """

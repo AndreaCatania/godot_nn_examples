@@ -27,5 +27,3 @@ func _integrate_forces(state):
 
 	set_linear_velocity(vel)
 	set_angular_velocity(0)
-
-

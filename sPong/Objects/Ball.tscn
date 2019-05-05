@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/BallPhysicsMaterial.tres" type="PhysicsMaterial" id=1]
 [ext_resource path="res://Objects/Ball.gd" type="Script" id=2]
 [ext_resource path="res://Assets/ball.png" type="Texture" id=3]
+[ext_resource path="res://Assets/23338__altemark__pong.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/207960__altemark__tom-4.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5, 5 )
@@ -26,4 +28,10 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
 texture = ExtResource( 3 )
+
+[node name="PlayerHitAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="EnvHitAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
 [connection signal="body_entered" from="." to="." method="_on_Ball_body_entered"]

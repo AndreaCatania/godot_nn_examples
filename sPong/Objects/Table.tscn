@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Objects/Table.gd" type="Script" id=1]
 [ext_resource path="res://Assets/table.png" type="Texture" id=2]
 [ext_resource path="res://Assets/middle_line.png" type="Texture" id=3]
+[ext_resource path="res://Assets/sound_goal.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 470.192, 100 )
@@ -20,6 +21,7 @@ goal_player2_path = NodePath("GoalPlayer1")
 spawn_player1_path = NodePath("SpawnPlayer1")
 spawn_player2_path = NodePath("SpawnPlayer2")
 spawn_ball_path = NodePath("SpawnBall")
+audio_player_goal = NodePath("GoalAudio")
 
 [node name="TableSprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -81,6 +83,10 @@ position = Vector2( 250, 0 )
 
 [node name="SpawnBall" type="Node2D" parent="."]
 position = Vector2( 0, -230 )
+
+[node name="GoalAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -5.0
 [connection signal="body_entered" from="GoalPlayer1" to="." method="_on_GoalPlayer1_body_entered"]
 [connection signal="body_entered" from="GoalPlayer2" to="." method="_on_GoalPlayer2_body_entered"]
 [connection signal="body_exited" from="PlayeableArea" to="." method="_on_PlayeableArea_body_exited"]

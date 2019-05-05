@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Objects/AIController.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objects/GameCamera.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Objects/GameLeve.gd" type="Script" id=7]
 [ext_resource path="res://Objects/PlayerController.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/157218__adamweeden__video-game-die-or-lose-life.wav" type="AudioStream" id=9]
+[ext_resource path="res://Assets/342218__littlerainyseasons__good-end.wav" type="AudioStream" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 174.378, 258.591 )
@@ -25,6 +27,7 @@ start_round_delayer_path = NodePath("StartRoundDelayer")
 game_timer_path = NodePath("GameTimer")
 player_1_wall_path = NodePath("Table/Player1Wall")
 auto_start = false
+hide_synaptic_visualizer = true
 end_score_threshold = 0
 disable_player1_wall = true
 
@@ -47,6 +50,7 @@ process_mode = 1
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
 [node name="HUD" parent="Camera2D/CanvasLayer" instance=ExtResource( 3 )]
+level_path = NodePath("../../..")
 
 [node name="StartRoundDelayer" type="Timer" parent="."]
 wait_time = 0.01
@@ -56,3 +60,11 @@ one_shot = true
 process_mode = 0
 wait_time = 10.0
 one_shot = true
+
+[node name="Player1WinAudio" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 10 )
+
+[node name="Player1LoseAudio" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 9 )
