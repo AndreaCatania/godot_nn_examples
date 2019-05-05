@@ -214,6 +214,8 @@ func _ready():
 
 	if auto_start:
 		start_game()
+	else:
+		HUD.show_menu()
 
 
 func on_goal_received(player):

@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/pong_intro.ogv" type="VideoStream" id=1]
+[ext_resource path="res://Objects/Intro.gd" type="Script" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends VideoPlayer
+
+var aspect_ratio = 16.0/9.0
+
+func _ready():
+
+	var vsize = get_viewport_rect().size
+
+	if vsize.y < vsize.x / aspect_ratio:
+		set_size(Vector2(vsize.y * aspect_ratio, vsize.y))
+		set_position(Vector2( (vsize.x - vsize.y * aspect_ratio) / 2, 0))
+	else:
+		set_size(Vector2(vsize.x, vsize.x / aspect_ratio))
+		set_position(Vector2(0, (vsize.y - vsize.x / aspect_ratio) / 2))
+"
+
+[node name="Intro" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="VideoPlayer" type="VideoPlayer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -301.0
+margin_top = -251.0
+margin_right = 301.0
+margin_bottom = 251.0
+stream = ExtResource( 1 )
+autoplay = true
+script = SubResource( 1 )
+[connection signal="finished" from="VideoPlayer" to="." method="_on_VideoPlayer_finished"]

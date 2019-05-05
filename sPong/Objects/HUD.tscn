@@ -1,14 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Objects/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Assets/ScoreFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Assets/main_menu_txt.png" type="Texture" id=3]
+[ext_resource path="res://Assets/pong_intro.png" type="Texture" id=4]
 
 [node name="HUD" type="Control"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 player1_side_path = NodePath("Player1Side")
 player2_side_path = NodePath("Player2Side")
+main_menu_path = NodePath("MainMenu")
+difficult_dd_path = NodePath("MainMenu/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/DifficultLevel")
+match_point_dd_path = NodePath("MainMenu/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/MatchPoints")
 
 [node name="Player1Side" type="Control" parent="."]
 anchor_right = 0.5
@@ -60,3 +66,115 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+
+[node name="PauseBtn" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -25.0
+margin_right = 25.0
+margin_bottom = 20.0
+text = "Pause"
+
+[node name="MainMenu" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="MainMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MainMenu/MarginContainer"]
+margin_right = 200.0
+margin_bottom = 200.0
+texture = ExtResource( 3 )
+region_rect = Rect2( 14, 11, 483, 483 )
+patch_margin_left = 13
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 11
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu/MarginContainer/NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MarginContainer/NinePatchRect/MarginContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 185.0
+margin_bottom = 185.0
+
+[node name="Label" type="Label" parent="MainMenu/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+margin_right = 170.0
+margin_bottom = 14.0
+text = "Neural Pong"
+align = 1
+valign = 1
+
+[node name="HSeparator2" type="HSeparator" parent="MainMenu/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 170.0
+margin_bottom = 22.0
+
+[node name="DifficultLevel" type="OptionButton" parent="MainMenu/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+margin_top = 26.0
+margin_right = 170.0
+margin_bottom = 46.0
+text = "Difficult"
+
+[node name="MatchPoints" type="OptionButton" parent="MainMenu/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+margin_top = 50.0
+margin_right = 170.0
+margin_bottom = 70.0
+text = "Match Points"
+
+[node name="StartMatchBtn" type="Button" parent="MainMenu/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+margin_top = 74.0
+margin_right = 170.0
+margin_bottom = 94.0
+text = "Start match"
+
+[node name="HSeparator3" type="HSeparator" parent="MainMenu/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+margin_top = 98.0
+margin_right = 170.0
+margin_bottom = 102.0
+
+[node name="ResumeBtn" type="Button" parent="MainMenu/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+margin_top = 106.0
+margin_right = 170.0
+margin_bottom = 126.0
+text = "Resume"
+
+[node name="HSeparator" type="HSeparator" parent="MainMenu/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+margin_top = 130.0
+margin_right = 170.0
+margin_bottom = 134.0
+
+[node name="ExitGameBtn" type="Button" parent="MainMenu/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+margin_top = 138.0
+margin_right = 170.0
+margin_bottom = 158.0
+text = "Exit Game"
+flat = true
+[connection signal="pressed" from="PauseBtn" to="." method="_on_PauseBtn_pressed"]
+[connection signal="pressed" from="MainMenu/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/StartMatchBtn" to="." method="_on_StartMatchBtn_pressed"]
+[connection signal="pressed" from="MainMenu/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/ResumeBtn" to="." method="_on_ResumeBtn_pressed"]
+[connection signal="pressed" from="MainMenu/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/ExitGameBtn" to="." method="_on_ExitGameBtn_pressed"]
