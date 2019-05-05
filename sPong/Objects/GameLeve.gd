@@ -23,6 +23,7 @@ export var hide_synaptic_visualizer := false
 export var end_score_threshold := 5
 export var game_time := 0.0
 export var reset_position_on_game_start := true
+export var reset_position_on_round_start := false
 export var disable_player1_wall := false
 
 var camera = null
@@ -168,7 +169,8 @@ func round_advance():
 
 
 func _start_round():
-	reset_players_position()
+	if reset_position_on_round_start:
+		reset_players_position()
 	var from = table.get_ball_spawn().get_global_transform()
 	var dir = ball_kicker.get_ball_kick_direction(score_player1 + score_player2)
 	ball.kick(from, dir)

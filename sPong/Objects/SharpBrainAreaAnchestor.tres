@@ -1,0 +1,7 @@
+[gd_resource type="SharpBrainAreaStructureAncestor" format=2]
+
+[resource]
+input_count = 376
+output_count = 2
+randomize_weights = true
+output_activation_func = 6

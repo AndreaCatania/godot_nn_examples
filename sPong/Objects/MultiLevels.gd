@@ -65,9 +65,14 @@ func add_game_level():
 	level.end_score_threshold = games_per_organism
 	level.game_time = game_time_per_organism
 	level.use_custom_controllers = true
+	level.reset_position_on_game_start = true
+	level.reset_position_on_round_start = true
 	level.no_view = true
 	level.auto_start = false
 	level.ball_kicker = self
+	level.disable_player1_wall = false
+
+	controller.auto_advance_on_5_ball_hit = true
 
 	var level_id = levels.size()
 	levels.push_back(level)
@@ -82,8 +87,11 @@ func add_game_level():
 
 func init_champion_game_level():
 	champion_AI = AIController_scene.instance()
+	champion_AI.auto_advance_on_5_ball_hit = true
+
 	champion_level.end_score_threshold = 0
 	champion_level.game_time = 400.0
+	champion_level.ball_kicker = self
 	champion_level.set_player_controller(Globals.Player2, champion_AI)
 
 
@@ -99,7 +107,8 @@ func start_all_levels():
 
 
 func start_champion_level():
-	neat_pop.get_champion_brain_area(champion_AI.brain_area)
+	#neat_pop.get_champion_brain_area(champion_AI.brain_area)
+	champion_AI.brain_area.structure = neat_pop.get_champion_brain_area()
 	champion_AI.brain_area.save_knowledge("res://champion_knowledge", true)
 	champion_level.start_game()
 
@@ -131,8 +140,8 @@ func create_ball_kick_list():
 
 func _int_get_ball_kick_direction() -> Vector2:
 	return Vector2(
-		max(randf()+0.3, 1.0)*sign(randf()-0.5),
-		min(randf()+0.1, 1.0))
+		rand_range(0.2, 1) * sign(randf()-0.5),
+		rand_range(0.1, 0.5)).normalized()
 
 
 """ NOTIFICATIONS """

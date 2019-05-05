@@ -4,7 +4,7 @@
 [ext_resource path="res://Objects/InputSynapticVisualizer.tscn" type="PackedScene" id=2]
 
 [sub_resource type="SharpBrainAreaStructureFile" id=1]
-path = "res://champion_best_knowledge"
+path = "res://champion_knowledge_easy"
 
 [node name="AIController" type="Node"]
 script = ExtResource( 1 )

@@ -55,8 +55,8 @@ It's called by the GameLevel if this script is assigned to GameLevel.ball_kicker
 """
 func get_ball_kick_direction(current_round: int) -> Vector2:
 	return Vector2(
-		max(randf()+0.3, 1.0)*sign(randf()-0.5),
-		min(randf()+0.1, 1.0))
+		rand_range(0.2, 1) * sign(randf()-0.5),
+		rand_range(0.1, 0.5)).normalized()
 
 
 func _on_PlayeableArea_body_exited(body):

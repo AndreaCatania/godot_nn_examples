@@ -17,18 +17,16 @@ const ball_velocity = 450
 const table_size_x = 500
 const table_size_y = 500
 
-const NN_grid_size_x = 1
-const NN_grid_size_y = 750
-const NN_propagation_radius = 10
-const NN_propagation_power = 0.3
-const NN_grid_factor = Vector2(0, -1.0)
-const NN_grid_offset = Vector2(0, 750.0 / 2.0)
+const NN_size = 5
 
-const fitness_starting_fitness = 0.0
-const fitness_ball_closness = 0.02
-const fitness_goal_received = -10
+const fitness_starting_fitness = 500.0
+const fitness_ball_closness = 0.03
+const fitness_goal_received = -10.0 # changes depending on the ball hits
 
-const champion_best_knw_path = "res://champion_best_knowledge"
+const knw_easy_path = "res://champion_knowledge_easy"
+const knw_normal_path = "res://champion_knowledge_normal"
+const knw_extreme_path = "res://champion_knowledge_extreme"
+
 
 func compute_fitness(ball_hits) -> float:
 	return pow(ball_hits / 2.0, 3.0)
