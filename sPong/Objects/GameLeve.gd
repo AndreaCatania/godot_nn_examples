@@ -90,13 +90,14 @@ func is_playing() -> bool:
 
 func set_difficult(diff):
 	difficult = diff
-	var s = SharpBrainAreaStructureFile.new()
+	var s
 	if diff == 0:
-		s.set_file_path(Globals.knw_easy_path)
+		s = load(Globals.knw_easy_path)
 	elif diff == 1:
-		s.set_file_path(Globals.knw_normal_path)
+		s = load(Globals.knw_normal_path)
 	else:
-		s.set_file_path(Globals.knw_extreme_path)
+		s = load(Globals.knw_extreme_path)
+	assert(s != null)
 	player2_controller.brain_area.structure = s
 
 

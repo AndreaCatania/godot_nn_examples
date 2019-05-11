@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Objects/AIController.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Objects/GameCamera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Table.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Objects/HUD.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Objects/Table.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Objects/GameCamera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Objects/Ball.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Objects/GameLeve.gd" type="Script" id=7]
@@ -31,7 +31,7 @@ hide_synaptic_visualizer = true
 end_score_threshold = 0
 disable_player1_wall = true
 
-[node name="Table" parent="." instance=ExtResource( 4 )]
+[node name="Table" parent="." instance=ExtResource( 2 )]
 goal_player1_path = NodePath("../../GameLevel/Table/GoalPlayer1")
 goal_player2_path = NodePath("../../GameLevel/Table/GoalPlayer1")
 spawn_player1_path = NodePath("../../GameLevel/Table/SpawnPlayer1")
@@ -44,7 +44,7 @@ position = Vector2( -437.44, 0 )
 [node name="Shape" type="CollisionShape2D" parent="Table/Player1Wall"]
 shape = SubResource( 1 )
 
-[node name="Camera2D" parent="." instance=ExtResource( 2 )]
+[node name="Camera2D" parent="." instance=ExtResource( 4 )]
 process_mode = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]

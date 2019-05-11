@@ -23,9 +23,9 @@ const fitness_starting_fitness = 500.0
 const fitness_ball_closness = 0.03
 const fitness_goal_received = -10.0 # changes depending on the ball hits
 
-const knw_easy_path = "res://champion_knowledge_easy"
-const knw_normal_path = "res://champion_knowledge_normal"
-const knw_extreme_path = "res://champion_knowledge_extreme"
+const knw_easy_path = "res://champion_knowledge_easy.brainweights"
+const knw_normal_path = "res://champion_knowledge_normal.brainweights"
+const knw_extreme_path = "res://champion_knowledge_extreme.brainweights"
 
 
 func compute_fitness(ball_hits) -> float:

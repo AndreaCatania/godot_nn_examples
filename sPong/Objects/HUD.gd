@@ -87,6 +87,7 @@ func init_main_menu():
 	match_point_dd.add_item("30")
 	match_point_dd.add_item("50")
 	match_point_dd.add_item("100")
+	match_point_dd.selected = 2
 
 
 func show_menu():
